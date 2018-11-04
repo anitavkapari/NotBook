@@ -11,6 +11,7 @@ import com.example.dell.notebook.DB.DBHolder;
 import com.example.dell.notebook.DB.Notes;
 import com.example.dell.notebook.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NoteListAdapter extends RecyclerView.Adapter<NoteViewHolder>{
@@ -34,6 +35,7 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteViewHolder>{
         final Notes note=notes.get( i );
         studentViewHolder .txttitle.setText( "Title :"+ note.getTitle() );
         studentViewHolder .txtNote.setText( "Note :"+ note.getNote() );
+
     }
 
 
@@ -42,5 +44,14 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteViewHolder>{
             return notes.size();
         }
 
+    public interface NoteAdapterListener {
+        void onContactSelected(String title);
+
     }
+    public  void  setFilter(ArrayList<Notes> newList){
+        notes = new ArrayList<>();
+        notes.addAll(newList);
+        notifyDataSetChanged();
+    }
+}
 

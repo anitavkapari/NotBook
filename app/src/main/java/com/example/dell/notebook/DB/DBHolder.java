@@ -43,7 +43,7 @@ public class DBHolder  extends SQLiteOpenHelper{
             return true;
         }
     }
-    public List<Notes> getAll() {
+    public List<Notes> getAllNote() {
         List<Notes> notes = new ArrayList<>( );
         SQLiteDatabase db = getReadableDatabase( );
 
@@ -87,24 +87,23 @@ public class DBHolder  extends SQLiteOpenHelper{
             return true;
         }
     }
+*/
 
-
-    public Notes getStudent(String name)
+    public Notes getNote(String title)
     {
-        Notes student=null;
+        Notes notes=null;
         SQLiteDatabase db= getReadableDatabase();
-        String query= "select * from "+TABLE+ " where "+NAME+ "='"+name+"'";
+        String query= "select * from "+TABLE+ " where "+TITLE+ "='"+title+"'";
         Cursor cursor= db.rawQuery( query,null );
 
         if (cursor.moveToFirst()){
             int id = cursor.getInt( cursor.getColumnIndex( ID ) );
-            String address = cursor.getString( cursor.getColumnIndex( ADDRESS ) );
-            String phone = cursor.getString( cursor.getColumnIndex( PHONE ) );
-            student = new Notes(name,address,phone);
-            student.setId(id);
+            String note = cursor.getString( cursor.getColumnIndex( NOTE ) );
+            notes = new Notes(id,title,note);
+            notes.setId(id);
         }
-        return  student;
-    }*/
+        return  notes;
+    }
    @Override
    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
